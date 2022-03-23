@@ -1,4 +1,3 @@
-
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
@@ -16,8 +15,7 @@
         document.getElementById('depPay').value = parseInt(a) - parseInt(y);
       }
 
-
-      function getName() {
+      function getDetails() {
         id=document.getElementById('usersID').value;
         fetch(`http://localhost:8000/create-advanced-f-company/${id}/`, {
           method: 'GET', // or 'PUT'
@@ -56,6 +54,32 @@
             window.location.reload()
           }
         })
+      }
+    </script>
+
+    <script>
+      function getUsersName(){
+        id=document.getElementById("usersID").value
+        
+        fetch(`http://localhost:8000/create-advanced-f-company/${id}/`, {
+          method: 'GET', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          
+          if(data!="0"){
+            document.getElementById("date").value=data.date
+            document.getElementById("usersName").value=data.name
+          }
+          else{
+            alert('Could not find data with this id')
+            window.location.reload()
+          }
+        })
 
       }
     </script>
@@ -74,7 +98,7 @@
       </div>
       <div class="report-btns">
         <button>Enter new record</button>
-        <button type="button" onClick="getName()">find</button>
+        <button type="button" onClick="getDetails()">find</button>
       </div>
       <!-- End Page Title-->
       <div class="text-center">
@@ -97,7 +121,7 @@
               <div class="col-md-6 col-lg-4">
                 <div class="mb-3">
                   <label class="form-label">id</label>
-                  <input class="form-control" id="usersID" type="text" name="idComapny"/>
+                  <input class="form-control" id="usersID" onfocusout="getUsersName()" type="text" name="idComapny"/>
                 </div>
               </div>
               <div class="col-md-6 col-lg-4">
