@@ -21,13 +21,16 @@ urlpatterns = [
     
     # myfun
     path('create-advanced-f-company/<int:pk>/',views.create_advanced_f_company, name="create_advanced_f_company"),
+    path('create-advanced-f-company/<int:pk>/<slug:admindata>/',views.create_advanced_f_company, name="create_advanced_f_company"),
+    
 
     path("advanced-f-company-report",views.advanced_f_company_report,name="advanced_f_company_report"),
     path("f-company-report",views.f_company_report ,name="f_company_report"),
 
     path("create-f-company-record",views.create_f_company_record,name="create_f_company_record"),
     # my fun
-    path("create-f-company-record/<slug:fcom>/<int:pk>/",views.create_f_company_record,name="create_f_company_record"),
+    path("create-f-company-record/<slug:fcom>/<int:pk>/",views.create_f_company_record,name="create_f_company_record"), 
+    
 
     # myfun
     path('delete-doc/<int:id>/', views.delete_doc, name="delete_doc") 

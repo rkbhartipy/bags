@@ -15,6 +15,9 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+# from admins app
+from admins.serializer import idnameSerializer
+from admins.models import ID_name
 
 # Create your views here.
 def index(request):
@@ -94,7 +97,15 @@ def upload_document(request, pk=None):
 
 
 @api_view(['GET','POST'])
-def create_advanced_f_company(request, pk=None):
+def create_advanced_f_company(request, pk=None, admindata=None):
+    if (pk is not None) and (admindata=="fromadmin"):
+        print("Creating advanced")
+        try:
+            obj=ID_name.objects.get(id_key=pk)
+            serializer = idnameSerializer(obj)
+            return JsonResponse(serializer.data, safe=False)
+        except Exception as e:
+            return JsonResponse("0", safe=False)
 
     if pk is not None:
         try:

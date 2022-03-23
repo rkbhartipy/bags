@@ -61,34 +61,7 @@
       function getUsersName(){
         id=document.getElementById("usersID").value
         
-        fetch(`http://localhost:8000/create-advanced-f-company/${id}/`, {
-          method: 'GET', // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          
-          if(data!="0"){
-            document.getElementById("date").value=data.date
-            document.getElementById("usersName").value=data.name
-          }
-          else{
-            alert('Could not find data with this id')
-            window.location.reload()
-          }
-        })
-
-      }
-    </script>
-    
-    <script>
-      function getUsersName(){
-        id=document.getElementById("usersID").value
-        
-        fetch(`http://localhost:8000/create-advanced-f-company/${id}/`, {
+        fetch(`http://localhost:8000/create-advanced-f-company/${id}/${"fromadmin"}/`, {
           method: 'GET', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
